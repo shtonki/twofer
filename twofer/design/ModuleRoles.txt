@@ -1,0 +1,36 @@
+PWS
+
+PWS is to provide a windows forms like interface except tailored towards the 
+needs of stonerkart. It should contain all the widgets nessecary for all the
+graphics components. Widgets should be completely agnostic as to the internal 
+logic and data structures of stonerkart and should be updated via a message 
+sending interface.
+
+
+
+Game State
+
+The complete game state is to be run on the server side as well as the client 
+side. The user interact with a PWS window in order to make in game decisions 
+such as which card to cast or which colour of mana to gain. This choice is 
+then sent to the server which sends it to the other players in the game. 
+
+
+
+Game Controller
+
+Provides an interface by which one can manipulate the game state. Events 
+manupulate game state; inputs are choices made by users. 
+
+
+
+Cards
+
+Cards are defined using a native C# esque scripting language.
+
+
+
+Server
+
+The server is to manage all user information, collections and currencies,
+friends, messaging, matchmaking.
