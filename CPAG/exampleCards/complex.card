@@ -1,0 +1,32 @@
+﻿// typchecking?
+// what happens if we call Destroy on a Player
+// how do we know what to do when we Destroy a Card
+// ModifyColourAdd on this vs myWhiteCreatures; i.e. single Card vs collection of Cards
+
+Name = "asd";
+Toughness = 4;
+
+TriggeredAbility entersBattlefieldAbility(
+    event etbEvent EntersBattlefieldEvent;
+    constraint shouldConstraintsHaveNames0 etbEvent.Entering == this;
+    target targetedCreature targetedCreature.Colour == Colours.Red || targetedCreature.Power == 0;
+    cost etbManaCost ManaCost(ManaCost.RedOrb, ManaCost.Colourless); 
+    cost sacCreature Sacrifice(creature0, creature1: creature0.Colour == creature1.Colour);
+)
+{
+    Destroy(targetedCreature);
+    Damage(targetedPlayer, 4);
+    DiscardCards(targetPlayer, 1);  
+}
+
+Aura memeaura(
+    constraint xd0 this.Location == Location.Field;
+    collection myWhiteCreatures Collections.Field(creature0: 
+        creature0.CardType == CardTypes.Creature && 
+        creature0.Controller == this.Controller &&
+        creature0.Colour == Colours.White);
+    )
+{
+    ModifyColourAdd(myWhiteCreatures, Colours.Red);
+    ModifyToughness(myWhiteCreatures, this.Owner.Hand.Count);
+}

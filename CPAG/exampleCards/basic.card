@@ -1,0 +1,7 @@
+﻿BaseStats
+{
+    Name = "Shibaby";
+    Power = 4;
+    Toughness = 4;
+}
+
