@@ -13,8 +13,6 @@ namespace CPAG.src
             var parseStream = new ParseStream("../../exampleCards/basic.card");
             var parser = new Parser(parseStream);
             parser.Parse();
-            Console.ReadLine();
         }
-
     }
 }

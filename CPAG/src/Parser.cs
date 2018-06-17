@@ -31,6 +31,7 @@ namespace CPAG.src
             Cost,
             Constraint,
             Effect,
+            Target,
         }
 
         
@@ -82,6 +83,7 @@ namespace CPAG.src
                 case Heads.Cost:
                 case Heads.Constraint:
                 case Heads.Effect:
+                case Heads.Target:
                 {
                     ParseParamaterBlock(head);
                 } break;
@@ -148,6 +150,11 @@ namespace CPAG.src
                 case Heads.Effect:
                 {
                     return new ParamaterEffect(paramaterName, paramaterBody);
+                }
+
+                case Heads.Target:
+                {
+                    return new ParamaterTarget(paramaterName, paramaterBody);
                 }
 
                 default:

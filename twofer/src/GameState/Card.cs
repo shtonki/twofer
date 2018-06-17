@@ -30,5 +30,10 @@ namespace twofer.src.GameState
     {
         
     }
+
+    public class Target
+    {
+        
+    }
 }
 

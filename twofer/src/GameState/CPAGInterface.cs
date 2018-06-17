@@ -25,7 +25,7 @@ namespace twofer.src.GameState
 
         // Member making functions exposed to CPAG
 
-        protected ActivatedAbility MakeActivatedAbility(Cost cost, Effect effect, Constraint castable)
+        protected ActivatedAbility MakeActivatedAbility(Cost cost, Effect effect, Constraint castable, Target[] targets)
         {
             throw new NotImplementedException("if you weren't expecting too see this you might be in some trouble son");
         }
@@ -41,6 +41,11 @@ namespace twofer.src.GameState
         }
 
         protected Constraint MakeConstraint(CPAGCodeBlock block)
+        {
+            throw new NotImplementedException("if you weren't expecting too see this you might be in some trouble son");
+        }
+
+        protected Target MakeTarget(CPAGCodeBlock block)
         {
             throw new NotImplementedException("if you weren't expecting too see this you might be in some trouble son");
         }

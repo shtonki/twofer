@@ -6,70 +6,6 @@ using System.Threading.Tasks;
 
 namespace CPAG.src
 {
-    /// <summary>
-    /// Represents a member in the class being generated
-    /// </summary>
-    public class Member
-    {
-        public enum MemberType
-        {
-            Cost,
-            Constraint,
-            Effect,
-            Ability,
-            Function,
-        }
-
-        public MemberType Type { get; }
-
-        /// <summary>
-        /// The name by which the member can be refered
-        /// </summary>
-        public string Handle { get; }
-        
-        /// <summary>
-        /// The code block containing the declaration of the member
-        /// </summary>
-        public Block Declaration { get; }
-
-        /// <summary>
-        /// The code block containing the definition of the member
-        /// </summary>
-        public Block Definition { get; }
-
-        public Member(MemberType type, string handle, Block declaration, Block definition)
-        {
-            Type = type;
-            Handle = handle;
-            Declaration = declaration;
-            Definition = definition;
-        }
-    }
-
-    class MemberCollection
-    {
-        public IEnumerable<Member> All => Members;
-        public IEnumerable<string> AbilityNames => AbilityHandles;
-
-        private List<Member> Members { get; } = new List<Member>();
-        private List<string> AbilityHandles { get; } = new List<string>();
-
-        public void Add(Member member)
-        {
-            if (Members.Any(m => m.Handle == member.Handle))
-            {
-                throw new GenerationException("too lazy for real message");
-            }
-
-            if (member.Type == Member.MemberType.Ability)
-            {
-                AbilityHandles.Add(member.Handle);
-            }
-
-            Members.Add(member);
-        }
-    }
-
     class Generator
     {
         public const string CPAGEnvironmentType = "CPAGToolbox";
@@ -135,11 +71,6 @@ namespace CPAG.src
             Members.Add(BaseStatsFunction);
         }
 
-        /// <summary>
-        /// Generates code for a ActivatedAbility
-        /// </summary>
-        /// <param name="classChunk"></param>
-        /// <param name="staticInitializationChunk"></param>
         public void GenerateActivatedAbility(
             string              abilityHandle, 
             IEnumerable<string> paramaterList)
@@ -186,11 +117,23 @@ namespace CPAG.src
                 throw new GenerationException(
                     "ActivatedAbilities requires exactly one Constraint paramater.");
             }
-            
-            // generate ability member
+
+
+            // build target array
+            var targetParamaters = paramArray.Where(p => p.Head == Parser.Heads.Target);
+            StringBuilder sb = new StringBuilder();
+            sb.Append("new Target[] { ");
+            foreach (var target in targetParamaters)
+            {
+                sb.Append(target.Handle);
+                sb.Append(", ");
+            }
+            sb.Append("}");
+            string targetList = sb.ToString();
+
             Block abilityDefinition = new Block(
-                "{0} = MakeActivatedAbility({1}, {2}, {3});",
-                abilityHandle, costHandle, effectHandle, constraintHandle
+                "{0} = MakeActivatedAbility({1}, {2}, {3}, {4});",
+                abilityHandle, costHandle, effectHandle, constraintHandle, targetList
                 );
             Block abilityDeclaration = new Block(
                 "private ActivatedAbility {0};", abilityHandle);
@@ -273,4 +216,70 @@ namespace CPAG.src
             Emittor.DeindentAndEmitClosingBracket();
         }
     }
+
+    /// <summary>
+    /// Represents a member in the class being generated
+    /// </summary>
+    public class Member
+    {
+        public enum MemberType
+        {
+            Cost,
+            Constraint,
+            Effect,
+            Ability,
+            Function,
+            Target,
+        }
+
+        public MemberType Type { get; }
+
+        /// <summary>
+        /// The name by which the member can be refered
+        /// </summary>
+        public string Handle { get; }
+
+        /// <summary>
+        /// The code block containing the declaration of the member
+        /// </summary>
+        public Block Declaration { get; }
+
+        /// <summary>
+        /// The code block containing the definition of the member
+        /// </summary>
+        public Block Definition { get; }
+
+        public Member(MemberType type, string handle, Block declaration, Block definition)
+        {
+            Type = type;
+            Handle = handle;
+            Declaration = declaration;
+            Definition = definition;
+        }
+    }
+
+    class MemberCollection
+    {
+        public IEnumerable<Member> All => Members;
+        public IEnumerable<string> AbilityNames => AbilityHandles;
+
+        private List<Member> Members { get; } = new List<Member>();
+        private List<string> AbilityHandles { get; } = new List<string>();
+
+        public void Add(Member member)
+        {
+            if (Members.Any(m => m.Handle == member.Handle))
+            {
+                throw new GenerationException("too lazy for real message");
+            }
+
+            if (member.Type == Member.MemberType.Ability)
+            {
+                AbilityHandles.Add(member.Handle);
+            }
+
+            Members.Add(member);
+        }
+    }
+
 }
