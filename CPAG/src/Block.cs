@@ -10,13 +10,23 @@ namespace CPAG.src
     /// <summary>
     /// Represents a block of code
     /// </summary>
-    class Block
+    public class Block
     {
         public string Content { get; }
+        public string Comment { get; set; }
 
-        public Block(string content)
+        public static Block Empty => new Block("");
+
+        public Block(string content, params object[] formatArgs)
         {
-            Content = content;
+            if (formatArgs.Length > 0)
+            {
+                Content = String.Format(content, formatArgs);
+            }
+            else
+            {
+                Content = content;
+            }
         }
     }
 }

@@ -1,0 +1,16 @@
+﻿
+BaseStats
+{
+    Initialization Code Block
+}
+
+ActivatedAbility
+{
+    Paramater Block
+        required
+            Cost
+            Constraint
+}
+{
+    Effect Code Block
+}

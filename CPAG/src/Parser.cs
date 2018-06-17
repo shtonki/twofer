@@ -7,17 +7,35 @@ using System.Threading.Tasks;
 
 namespace CPAG.src
 {
-    class Parser
+    public class Parser
     {
+
+        public const char EndOfStream = '\0';
+        public const char StartOfBlock = '{';
+        public const char EndOfBlock = '}';
+        public const char StartOfParamaters = '(';
+        public const char EndOfParamaters = ')';
+        public const char ParamaterSeparator = ',';
+
         private ParseStream ParseStream;
 
 
-        private enum Heads
+        public enum Heads
         {
             EndOfStream,
 
             BaseStats,
+
+            ActivatedAbility,
+
+            Cost,
+            Constraint,
+            Effect,
         }
+
+        
+        private Random Random = new Random();
+        private int RandomInt => Random.Next();
 
         public Parser(ParseStream parseStream)
         {
@@ -37,7 +55,7 @@ namespace CPAG.src
                 ParseBody(head);
             }
 
-            var output = Generator.Generate();
+            var output = Generator.Collect();
             Console.WriteLine(output);
             File.WriteAllText("out.cs", output);
         }
@@ -50,7 +68,7 @@ namespace CPAG.src
             Heads head;
             if (!Heads.TryParse(eatenString, out head))
             {
-                throw new ParseError(ParseStream, "Expected block name.");
+                throw new ParseException(ParseStream, "Expected block name.");
             }
 
             return head;
@@ -60,9 +78,22 @@ namespace CPAG.src
         {
             switch (head)
             {
+                // paramaters
+                case Heads.Cost:
+                case Heads.Constraint:
+                case Heads.Effect:
+                {
+                    ParseParamaterBlock(head);
+                } break;
+
                 case Heads.BaseStats:
                 {
-                    Generator.EmitBaseStatsBlock(ParseBaseStatsBlock());
+                    ParseBaseStatsBlock();
+                } break;
+
+                case Heads.ActivatedAbility:
+                {
+                    ParseActivatedAbilityBlock();
                 } break;
 
                 case Heads.EndOfStream:
@@ -76,10 +107,54 @@ namespace CPAG.src
             }
         }
 
-        private Block ParseBaseStatsBlock()
+        private void ParseBaseStatsBlock()
         {
             var text = ParseStream.EatBlock();
-            return new Block(text);
+            Generator.GenerateBaseStatsBlock(text);
+        }
+
+        private void ParseActivatedAbilityBlock()
+        {
+            var abilityName = ParseStream.EatWord();
+            var paramaterList = ParseStream.EatParamaterList();
+            Generator.GenerateActivatedAbility(abilityName, paramaterList);
+        }
+
+        private void ParseParamaterBlock(Heads paramaterHead)
+        {
+            var paramaterName = ParseStream.EatWord();
+            var paramaterBody = ParseStream.EatBlock();
+            var param = ParseParamater(paramaterHead, paramaterName, paramaterBody);
+            Generator.GenerateParamater(param);
+        }
+
+        private Paramater ParseParamater(
+            Heads   paramaterHead, 
+            string  paramaterName, 
+            string  paramaterBody)
+        {
+            switch (paramaterHead)
+            {
+                case Heads.Cost:
+                {
+                    return new ParamaterCost(paramaterName, paramaterBody);
+                } break;
+
+                case Heads.Constraint:
+                {
+                    return new ParamaterConstraint(paramaterName, paramaterBody);
+                } break;
+
+                case Heads.Effect:
+                {
+                    return new ParamaterEffect(paramaterName, paramaterBody);
+                }
+
+                default:
+                {
+                    throw new Exception("bad");
+                } break;
+            }
         }
     }
 }

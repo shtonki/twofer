@@ -46,5 +46,15 @@ namespace CPAG.src
             }
             Collector.AppendLine(emission);
         }
+
+        public void EmitBlock(Block block)
+        {
+            if (!string.IsNullOrEmpty(block.Comment))
+            {
+                EmitLine("// " + block.Comment);
+            }
+            EmitLine(block.Content);
+            EmitLine("");
+        }
     }
 }

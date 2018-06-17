@@ -81,12 +81,14 @@
     <Compile Include="src\GameState\AbilityActivation.cs" />
     <Compile Include="src\GameState\Card.cs" />
     <Compile Include="src\GameState\Cost.cs" />
+    <Compile Include="src\GameState\CPAGInterface.cs" />
     <Compile Include="src\GameState\Effect.cs" />
     <Compile Include="src\GameState\GameController.cs" />
     <Compile Include="src\GameState\GameEvent.cs" />
     <Compile Include="src\GameState\GameObject.cs" />
     <Compile Include="src\GameState\GameStack.cs" />
     <Compile Include="src\GameState\GameState.cs" />
+    <Compile Include="src\GameState\Mana.cs" />
     <Compile Include="src\GameState\Map.cs" />
     <Compile Include="src\GameState\Pawn.cs" />
     <Compile Include="src\GameState\Pile.cs" />

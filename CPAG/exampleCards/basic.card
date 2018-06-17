@@ -5,3 +5,24 @@
     Toughness = 4;
 }
 
+Cost CastCost
+{
+    //CPL.ManaCost(ManaOrb.Order);
+}
+
+Constraint ThisPowerOverOne
+{
+    //CPL.Constrain(this.Power > 1);
+}
+
+Effect CastEffect
+{
+    //CPL.DrawCards(this.Owner, 2);
+}
+
+ActivatedAbility CastAbility
+(
+    Cost CastCost,
+    Constraint ThisPowerOverOne,
+    Effect CastEffect,
+)

@@ -38,6 +38,7 @@ namespace twofer.src.GameState
                 }
 
                 GameState.CastAbility(priorityResult.AbilityActivation);
+                castingPlayerIndex = 0;
             }
         }
 

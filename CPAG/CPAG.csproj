@@ -46,7 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ParseStream.cs" />
+    <Compile Include="src\Paramater.cs" />
+    <Compile Include="src\ParseStream.cs" />
     <Compile Include="src\Block.cs" />
     <Compile Include="src\Emittor.cs" />
     <Compile Include="src\Generator.cs" />
@@ -57,9 +58,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="exampleCards\a.card" />
     <None Include="exampleCards\basic.card" />
-    <None Include="exampleCards\complex.card" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Syntax.txt" />
+    <Content Include="targetCards\activatedAbility.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

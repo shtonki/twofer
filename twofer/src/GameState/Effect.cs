@@ -8,5 +8,6 @@ namespace twofer.src.GameState
 {
     public class Effect
     {
+        
     }
 }

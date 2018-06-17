@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace twofer.src.GameState
 {
-    class Player : GameObject
+    public class Player : GameObject
     {
         public bool IsHero;
 

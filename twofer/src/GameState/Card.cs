@@ -3,13 +3,15 @@ using System;
 
 namespace twofer.src.GameState
 {
-    public abstract class Card : GameObject
+    public abstract partial class Card : GameObject
     {
         public IntegerStat Power        { get; protected set; } = new IntegerStat(0);
         public IntegerStat Toughness    { get; protected set; } = new IntegerStat(0);
         public IntegerStat Movement     { get; protected set; } = new IntegerStat(0);
 
-        public StringStat Name { get; protected set; } = new StringStat("noname");
+        public StringStat Name          { get; protected set; } = new StringStat("noname");
+
+        protected Ability[] BaseAbilities { get; set; }
 
         protected Card(GameState game) : base(game)
         {
@@ -21,10 +23,12 @@ namespace twofer.src.GameState
             throw new NotImplementedException("if you weren't expecting too see this you might be in some trouble son");
         }
 
-        // CPAG Interface
-        protected abstract void CPAGResetStats();
-        //protected abstract IEnumerable<AbilityActivation> CPAGCheckTriggeredAbilities(GameEvent gevent);
-        //protected abstract void CPAGUpdateStats();
+    }
+
+    // doesn't belong here but i don\t want to make a file now
+    public class Constraint
+    {
+        
     }
 }
 

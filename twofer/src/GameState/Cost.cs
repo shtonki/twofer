@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace twofer.src.GameState
 {
-    public class Cost
+    public abstract class Cost
     {
+    }
+
+    public class CostMana : Cost
+    {
+        
     }
 }

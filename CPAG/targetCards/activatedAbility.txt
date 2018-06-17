@@ -1,0 +1,33 @@
+﻿namespace twofer.src.GameState
+{
+    class Shibaby : Card
+    {
+        public Shibaby()
+        {
+            ResetStats();
+
+            BaseAbilities = new[]
+            {
+                
+            };
+        }
+
+        private Cost CastAbilityCost0 = new ManaCost(ManaOrb.Order);
+
+        private bool CastAbilityConstraint(GPACToolbox cpagToolbox)
+        {
+            return this.IsOnField && this.Owner.Hand.Cards.Count > 0;
+        }
+
+        private Effect CastAbilityEffect
+
+        public override void ResetStats()
+        {
+            {
+                Name = "Shibaby";
+                Power = 4;
+                Toughness = 4;
+            }
+        }
+    }
+}
