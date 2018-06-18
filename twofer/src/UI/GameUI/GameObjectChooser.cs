@@ -7,11 +7,8 @@ using twofer.src.GameState;
 
 namespace twofer.src.UI.GameUI
 {
-    class GameObjectChooser
+    interface GameObjectChooser
     {
-        public GameObject ChooseGameObject()
-        {
-            throw new NotImplementedException("if you weren't expecting too see this you might be in some trouble son");
-        }
+        GameObject ChooseGameObject();
     }
 }

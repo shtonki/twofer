@@ -9,16 +9,12 @@ namespace CPAG.src
 {
     public class Parser
     {
-
         public const char EndOfStream = '\0';
         public const char StartOfBlock = '{';
         public const char EndOfBlock = '}';
         public const char StartOfParamaters = '(';
         public const char EndOfParamaters = ')';
         public const char ParamaterSeparator = ',';
-
-        private ParseStream ParseStream;
-
 
         public enum Heads
         {
@@ -34,18 +30,15 @@ namespace CPAG.src
             Target,
         }
 
-        
-        private Random Random = new Random();
-        private int RandomInt => Random.Next();
+        private Generator Generator;
+        private ParseStream ParseStream;
 
         public Parser(ParseStream parseStream)
         {
             ParseStream = parseStream;
         }
 
-        private Generator Generator;
-
-        public void Parse()
+        public string Parse()
         {
             Generator = new Generator();
 
@@ -56,9 +49,7 @@ namespace CPAG.src
                 ParseBody(head);
             }
 
-            var output = Generator.Collect();
-            Console.WriteLine(output);
-            File.WriteAllText("out.cs", output);
+            return Generator.Collect();
         }
 
         private Heads ParseHead()
@@ -105,7 +96,7 @@ namespace CPAG.src
                 default:
                 {
                     throw new Exception("Illegal fallthrough");
-                } break;
+                }
             }
         }
 
@@ -140,13 +131,11 @@ namespace CPAG.src
                 case Heads.Cost:
                 {
                     return new ParamaterCost(paramaterName, paramaterBody);
-                } break;
-
+                } 
                 case Heads.Constraint:
                 {
                     return new ParamaterConstraint(paramaterName, paramaterBody);
-                } break;
-
+                } 
                 case Heads.Effect:
                 {
                     return new ParamaterEffect(paramaterName, paramaterBody);
@@ -160,7 +149,7 @@ namespace CPAG.src
                 default:
                 {
                     throw new Exception("bad");
-                } break;
+                }
             }
         }
     }

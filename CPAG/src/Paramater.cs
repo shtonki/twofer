@@ -26,19 +26,26 @@ namespace CPAG.src
             string memberType = type.ToString();
             string functionName = Name + "Script";
             string makeFunctionName = "Make" + memberType;
+            string prototype = Generator.CPAGMemberPrototype;
+            string arguments = Generator.CPAGEnvironmentFunctionArgument;
+
 
             Block declaration = new Block(
-                "{0} {1} ({3})\n" +
+                "{0} {1} ({2})\n" +
                 "{{\n" +
-                "{2}" +
+                "{3}" +
                 "}}\n" +
-                "private {5} {4};",
-                Generator.CPAGMemberPrototype, functionName, 
-                Body, Generator.CPAGEnvironmentFunctionArgument, Name, memberType);
+                "private {4} {5};",
+                prototype, functionName, arguments, 
+                Body, 
+                memberType, Name
+                );
 
             Block definition = new Block(
-                "{0} = {2}( {1} );",
-                Name, functionName, makeFunctionName);
+                "{0} = {1}( {2} );",
+                Name, makeFunctionName, functionName
+                );
+
             return new Member(type, Name, declaration, definition);
         }
     }

@@ -8,6 +8,10 @@ namespace twofer.src.GameState
 {
 
     public delegate void CPAGCodeBlock(CPAGToolbox cpagToolbox);
+    public delegate bool CPAGConstraint(CPAGToolbox cpagToolbox);
+    public delegate bool CPAGEffect(CPAGToolbox cpagToolbox);
+    public delegate bool CPAGTarget(CPAGToolbox cpagToolbox);
+    public delegate bool CPAGCost(CPAGToolbox cpagToolbox);
 
     public class CPAGToolbox
     {

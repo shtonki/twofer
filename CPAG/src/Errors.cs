@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace CPAG.src
 {
+    // compiler valium
+    [Serializable]
     class ParseException : Exception
     {
         public ParseStream ParseStream;

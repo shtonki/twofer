@@ -18,11 +18,6 @@ namespace twofer.src.GameState
 
         }
 
-        public IEnumerable<AbilityActivation> CheckTriggeredAbilities(IEnumerable<GameEvent> gameEvents)
-        {
-            throw new NotImplementedException("if you weren't expecting too see this you might be in some trouble son");
-        }
-
     }
 
     // doesn't belong here but i don\t want to make a file now
@@ -37,3 +32,76 @@ namespace twofer.src.GameState
     }
 }
 
+namespace twofer.src.GameState
+{
+    class Shibaby : Card
+    {
+        public Shibaby(GameState gameState) : base(gameState)
+        {
+
+
+            CastCost = MakeCost(CastCostScript);
+
+            ThisPowerOverOne = MakeConstraint(ThisPowerOverOneScript);
+
+            CastEffect = MakeEffect(CastEffectScript);
+
+            CastTarget0 = MakeTarget(CastTarget0Script);
+
+            CastTarget1 = MakeTarget(CastTarget1Script);
+
+            CastAbility = MakeActivatedAbility(CastCost, CastEffect, ThisPowerOverOne, new Target[] { CastTarget0, CastTarget1, });
+
+            BaseAbilities = new[]
+            {
+                CastAbility,
+            }
+            ;
+        }
+        // BaseStats Declaration
+        protected override void CPAGResetStats(CPAGToolbox CPL)
+        {
+            Name = "Shibaby";
+            Power = 4;
+            Toughness = 4;
+        }
+
+        private void CastCostScript(CPAGToolbox CPL)
+        {
+
+            //CPL.ManaCost(ManaOrb.Order);
+        }
+        private Cost CastCost;
+
+        private void ThisPowerOverOneScript(CPAGToolbox CPL)
+        {
+
+            //CPL.Constrain(this.Power > 1);
+        }
+        private Constraint ThisPowerOverOne;
+
+        private void CastEffectScript(CPAGToolbox CPL)
+        {
+
+            //CPL.DrawCards(this.Owner, 2);
+        }
+        private Effect CastEffect;
+
+        private void CastTarget0Script(CPAGToolbox CPL)
+        {
+
+            //CPL.Target.Creature(c => c.IsWhite);
+        }
+        private Target CastTarget0;
+
+        private void CastTarget1Script(CPAGToolbox CPL)
+        {
+
+            //CPL.Target.Player();
+        }
+        private Target CastTarget1;
+
+        private ActivatedAbility CastAbility;
+
+    }
+}

@@ -10,6 +10,5 @@ namespace twofer.src.UI.GameUI
     abstract class GameUI
     {
         public GameObjectChooser GameObjectChooser { get; }
-        
     }
 }

@@ -149,8 +149,8 @@ namespace CPAG.src
             Members.Add(paramater.ToMember());
         }
 
-        string NAMESPACE = @"twofer.src.GameState";
-        string CLASSNAME = @"Shibaby";
+        public string NAMESPACE      { get; } = @"twofer.src.GameState";
+        public string CLASSNAME      { get; } = @"Shibaby";
 
         public string Collect()
         {

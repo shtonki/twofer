@@ -7,7 +7,6 @@
 
 Cost CastCost
 {
-    CastEffect.ToString();
     //CPL.ManaCost(ManaOrb.Order);
 }
 

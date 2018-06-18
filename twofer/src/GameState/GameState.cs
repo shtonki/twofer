@@ -24,16 +24,7 @@ namespace twofer.src.GameState
 
         private void HandleGameTransaction(GameTransaction gameTransaction)
         {
-            foreach (var card in FieldCards)
-            {
-                card.CheckTriggeredAbilities(gameTransaction.Events);
-                // MISSING place them on stack
-            }
-
-            foreach (var gameEvent in gameTransaction.Events)
-            {
-                HandleGameEvent(gameEvent);
-            }
+            throw new NotImplementedException();
         }
 
         private void HandleGameEvent(GameEvent gameEvent)
