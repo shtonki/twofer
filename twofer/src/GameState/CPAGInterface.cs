@@ -29,27 +29,27 @@ namespace twofer.src.GameState
 
         // Member making functions exposed to CPAG
 
-        protected ActivatedAbility MakeActivatedAbility(Cost cost, Effect effect, Constraint castable, Target[] targets)
+        protected ActivatedAbility  MakeActivatedAbility(Cost cost, Effect effect, Constraint castable, Target[] targets)
         {
             throw new NotImplementedException("if you weren't expecting too see this you might be in some trouble son");
         }
 
-        protected Effect MakeEffect(CPAGCodeBlock block)
+        protected Effect            MakeEffect(CPAGCodeBlock block)
         {
             throw new NotImplementedException("if you weren't expecting too see this you might be in some trouble son");
         }
 
-        protected Cost MakeCost(CPAGCodeBlock block)
+        protected Cost              MakeCost(CPAGCodeBlock block)
         {
             throw new NotImplementedException("if you weren't expecting too see this you might be in some trouble son");
         }
 
-        protected Constraint MakeConstraint(CPAGCodeBlock block)
+        protected Constraint        MakeConstraint(CPAGCodeBlock block)
         {
             throw new NotImplementedException("if you weren't expecting too see this you might be in some trouble son");
         }
 
-        protected Target MakeTarget(CPAGCodeBlock block)
+        protected Target            MakeTarget(CPAGCodeBlock block)
         {
             throw new NotImplementedException("if you weren't expecting too see this you might be in some trouble son");
         }

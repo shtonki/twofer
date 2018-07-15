@@ -1,4 +1,4 @@
-﻿ability - a unit of action perfomed by a card. is what what appears on the conceptual stack.
+﻿ability - a unit of action perfomed by a card.
 card - a card as it appears in a pile. it can only ever be in a pile. it will be in the stack pile but won't be the object on the stack
 destroy - when a pawn is destroyed it is moved to it's owners graveyard
 pawn - a pawn is the on board representation of a card
